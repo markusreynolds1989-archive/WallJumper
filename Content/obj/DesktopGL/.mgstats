@@ -1,4 +1,5 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
-"C:/Users/marsa/Documents/Code/C#/WallJumper/Content/Floor.png","C:/Users/marsa/Documents/Code/C#/WallJumper/Content/bin/DesktopGL/Floor.xnb","TextureProcessor","Texture2DContent",179,16085,0.3709928
-"C:/Users/marsa/Documents/Code/C#/WallJumper/Content/Player.png","C:/Users/marsa/Documents/Code/C#/WallJumper/Content/bin/DesktopGL/Player.xnb","TextureProcessor","Texture2DContent",221,4181,0.0109996
-"C:/Users/marsa/Documents/Code/C#/WallJumper/Content/Wall.png","C:/Users/marsa/Documents/Code/C#/WallJumper/Content/bin/DesktopGL/Wall.xnb","TextureProcessor","Texture2DContent",105,2133,0.0110079
+"/home/mars/RiderProjects/WallJumper/Content/Floor.png","/home/mars/RiderProjects/WallJumper/Content/bin/DesktopGL/Floor.xnb","TextureProcessor","Texture2DContent",179,16085,0.078802
+"/home/mars/RiderProjects/WallJumper/Content/Font.spritefont","/home/mars/RiderProjects/WallJumper/Content/bin/DesktopGL/Font.xnb","FontDescriptionProcessor","SpriteFontContent",2005,70673,0.107544
+"/home/mars/RiderProjects/WallJumper/Content/Player.png","/home/mars/RiderProjects/WallJumper/Content/bin/DesktopGL/Player.xnb","TextureProcessor","Texture2DContent",221,4181,0.000691
+"/home/mars/RiderProjects/WallJumper/Content/Wall.png","/home/mars/RiderProjects/WallJumper/Content/bin/DesktopGL/Wall.xnb","TextureProcessor","Texture2DContent",105,2133,0.000842

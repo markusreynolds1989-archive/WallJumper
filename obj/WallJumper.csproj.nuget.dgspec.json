@@ -1,32 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\marsa\\Documents\\Code\\C#\\WallJumper\\WallJumper.csproj": {}
+    "/home/mars/RiderProjects/WallJumper/WallJumper.csproj": {}
   },
   "projects": {
-    "C:\\Users\\marsa\\Documents\\Code\\C#\\WallJumper\\WallJumper.csproj": {
+    "/home/mars/RiderProjects/WallJumper/WallJumper.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\marsa\\Documents\\Code\\C#\\WallJumper\\WallJumper.csproj",
+        "projectUniqueName": "/home/mars/RiderProjects/WallJumper/WallJumper.csproj",
         "projectName": "WallJumper",
-        "projectPath": "C:\\Users\\marsa\\Documents\\Code\\C#\\WallJumper\\WallJumper.csproj",
-        "packagesPath": "C:\\Users\\marsa\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\marsa\\Documents\\Code\\C#\\WallJumper\\obj\\",
+        "projectPath": "/home/mars/RiderProjects/WallJumper/WallJumper.csproj",
+        "packagesPath": "/home/mars/.nuget/packages/",
+        "outputPath": "/home/mars/RiderProjects/WallJumper/obj/",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet"
-        ],
         "configFilePaths": [
-          "C:\\Users\\marsa\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "/home/mars/.config/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Users\\marsa\\AppData\\Roaming\\Cosmos User Kit\\packages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -68,15 +61,11 @@
               "version": "[3.0.1, 3.0.1]"
             },
             {
-              "name": "Microsoft.NETCore.App.Host.win-x64",
+              "name": "Microsoft.NETCore.App.Host.linux-x64",
               "version": "[3.0.1, 3.0.1]"
             },
             {
               "name": "Microsoft.NETCore.App.Ref",
-              "version": "[3.0.0, 3.0.0]"
-            },
-            {
-              "name": "Microsoft.WindowsDesktop.App.Ref",
               "version": "[3.0.0, 3.0.0]"
             }
           ],
@@ -85,7 +74,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/3.1.100/RuntimeIdentifierGraph.json"
         }
       }
     }

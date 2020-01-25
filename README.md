@@ -17,3 +17,10 @@ there are also hazards that come down.
 The walls are basic squares that go up almost infinitely. 
 Level ups occur that make the game more challenging as you go up. 
 If you die you get a score that tells you how far you've gone.
+
+## Game Loop Code
+1. When player goes above 0 in Y it will reset their Y position to 790.
+If they drop below 790 they will get a game over with their score.
+If they get hit or touch spikes they will lose a life.
+2. When they jump up over 0, 2 new walls will be created. The first time this happens
+the floor just won't be reproduced so it should go away.

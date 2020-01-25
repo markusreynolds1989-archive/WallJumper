@@ -42,6 +42,7 @@
           </e>
         </e>
       </e>
+      <e p="Floor.cs" t="Include" />
       <e p="Game1.cs" t="Include" />
       <e p="Icon.bmp" t="Include" />
       <e p="Icon.ico" t="Include" />
@@ -49,6 +50,7 @@
       <e p="Player.cs" t="Include" />
       <e p="Program.cs" t="Include" />
       <e p="README.md" t="Include" />
+      <e p="Wall.cs" t="Include" />
       <e p="WallJumper.csproj" t="IncludeRecursive" />
       <e p="app.manifest" t="Include" />
       <e p="bin" t="ExcludeRecursive" />

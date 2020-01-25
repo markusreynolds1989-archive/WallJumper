@@ -1,0 +1,4 @@
+Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
+"C:/Users/marsa/Documents/Code/C#/WallJumper/Content/Floor.png","C:/Users/marsa/Documents/Code/C#/WallJumper/Content/bin/DesktopGL/Floor.xnb","TextureProcessor","Texture2DContent",179,16085,0.3709928
+"C:/Users/marsa/Documents/Code/C#/WallJumper/Content/Player.png","C:/Users/marsa/Documents/Code/C#/WallJumper/Content/bin/DesktopGL/Player.xnb","TextureProcessor","Texture2DContent",221,4181,0.0109996
+"C:/Users/marsa/Documents/Code/C#/WallJumper/Content/Wall.png","C:/Users/marsa/Documents/Code/C#/WallJumper/Content/bin/DesktopGL/Wall.xnb","TextureProcessor","Texture2DContent",105,2133,0.0110079

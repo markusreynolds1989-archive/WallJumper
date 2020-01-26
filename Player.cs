@@ -20,11 +20,10 @@ namespace WallJumper
         }
 
         public void Update(GameTime gameTime
-            , Vector2 position
             , Vector2 speed)
         {
-            Position = position;
             Speed = speed;
+            Position += Speed;
         }
 
         public void Draw(SpriteBatch spriteBatch)

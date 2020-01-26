@@ -6,7 +6,7 @@ namespace WallJumper
 {
     public class Wall
     {
-        private Vector2 Position { get; set; }
+        public Vector2 Position { get; set; }
         private Texture2D WallSprite { get; set; }
         public bool Active { get; set; } = true;
         public int Width => WallSprite.Width;
@@ -22,7 +22,6 @@ namespace WallJumper
 
         public void Update(GameTime gameTime)
         {
-            
         }
 
         public void Draw(SpriteBatch spriteBatch)

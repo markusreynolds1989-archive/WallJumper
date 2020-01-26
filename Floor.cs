@@ -6,7 +6,7 @@ namespace WallJumper
 {
     public class Floor
     {
-        private Vector2 Position { get; set; }
+        public Vector2 Position { get; set; }
         private Texture2D FloorSprite { get; set; }
         public bool Active { get; set; } = true;
         public int Width => FloorSprite.Width;

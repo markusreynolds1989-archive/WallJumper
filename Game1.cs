@@ -20,6 +20,11 @@ namespace WallJumper
         private SpriteFont font;
         private TimeSpan bulletSpawnTime;
         private TimeSpan previousBulletSpawnTime;
+        private TimeSpan jumpTime;
+        private TimeSpan previousJumpTime;
+
+        private float gravity = 3;
+
         //private List<Bullet> bullets;
         private Wall leftWall;
         private Wall rightWall;
@@ -29,13 +34,13 @@ namespace WallJumper
         private int score = 0;
         private const int ScreenWidth = 500;
         private const int ScreenHeight = 800;
-        //Debug
-        private Point MousePOS; 
+
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this)
             {
-                PreferredBackBufferWidth = ScreenWidth, PreferredBackBufferHeight = ScreenHeight
+                PreferredBackBufferWidth = ScreenWidth,
+                PreferredBackBufferHeight = ScreenHeight
             };
             _graphics.ApplyChanges();
             Content.RootDirectory = "Content";
@@ -46,11 +51,11 @@ namespace WallJumper
         {
             floorSprite = Content.Load<Texture2D>("Floor");
             player = new Player();
-            player.Initialize(new Vector2(ScreenWidth/2
+            player.Initialize(new Vector2(ScreenWidth / 2
                 , ScreenHeight - 32));
             floor = new Floor();
-            floor.Initialize(floorSprite,new Vector2(0,794));
-            MousePOS = new Point(0,0);
+            floor.Initialize(floorSprite, new Vector2(0, 794));
+            jumpTime = TimeSpan.FromSeconds(0.1f);
             base.Initialize();
         }
 
@@ -67,65 +72,8 @@ namespace WallJumper
 
         protected override void Update(GameTime gameTime)
         {
-            //Check if game is still active before updating.
-            if (gameOver == true) return;
-            
-            var keyState = Keyboard.GetState();
-            //Quit options 
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed
-                || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
-                    
-            //Jump
-            //Collision is really messed up.
-            if (keyState.IsKeyDown(Keys.Space)
-                && floor.Active 
-                && player.Position.Y == floor.Height - floor.Position.Y - (player.Height/2))         
-                
-            {
-                player.Speed -= new Vector2(0, 20);
-                player.Position += player.Speed;
-            }
-
-            //Left and Right
-            if (keyState.IsKeyDown(Keys.Right)) player.Position += new Vector2(1, 0);
-            if (keyState.IsKeyDown(Keys.Left)) player.Position -= new Vector2(1, 0);
-            
-            //Gravity
-            if (player.Speed != new Vector2(0, 0)
-                && player.Position != new Vector2(player.Position.X, 0))
-            {
-                //Decrease the player speed until it's back to 0,0.
-                player.Speed -= new Vector2(0, 1);
-                player.Position += new Vector2(0,5);
-            }
-
-            //When the floor is active the player won't fall down. 
-            if (floor.Active == true
-                && player.Position.Y >= floor.Position.Y - floor.Height - player.Height/2)
-            {
-                player.Speed = new Vector2(0, 0);
-                player.Position = new Vector2(player.Position.X
-                    , floor.Position.Y - floor.Height - player.Height/2);
-            }
-
-            //When the player gets to the top. reset their position to the bottom of the screen and kill the floor.
-            if (player.Position.Y <= 0)
-            {
-                player.Position = new Vector2(player.Position.X
-                    , 794);
-                score += 10;
-                floor.Active = false;
-            }
-            
-            //When the player drops off, game is over.
-            if (player.Position.Y >= ScreenHeight)
-            {
-                gameOver = true;
-            }
-
-            var currentMouse = Mouse.GetState();
-            MousePOS = currentMouse.Position;
+            EventHandler(gameTime);
+            UpdateGravity();
             base.Update(gameTime);
         }
 
@@ -133,50 +81,160 @@ namespace WallJumper
         {
             GraphicsDevice.Clear(Color.Black);
             _spriteBatch.Begin();
-            //Debug
             _spriteBatch.DrawString(font
-            , $"Mouse X:{MousePOS.X.ToString()} Mouse Y:{MousePOS.Y.ToString()}"
-            , new Vector2(20, 5)
-            , Color.White);
-            _spriteBatch.DrawString(font
-            , $"PlayerX: {player.Position.X.ToString()} " +
-              $"PlayerY: {player.Position.Y.ToString()}"
-            , new Vector2(20,30)
-            ,Color.White);
-            _spriteBatch.Draw(wallSprite,leftWall.Position,Color.White);
-            _spriteBatch.Draw(wallSprite, rightWall.Position, Color.White); 
+                , $"PlayerX: {player.Position.X.ToString()} " +
+                  $"PlayerY: {player.Position.Y.ToString()}"
+                , new Vector2(20, 30)
+                , Color.White);
+            _spriteBatch.Draw(wallSprite, leftWall.Position, Color.White);
+            _spriteBatch.Draw(wallSprite, rightWall.Position, Color.White);
             //Score
             _spriteBatch.DrawString(font
-            , $"Score: {score.ToString()}"
-            , new Vector2(ScreenWidth - 120, 5)
-            , Color.White); 
+                , $"Score: {score.ToString()}"
+                , new Vector2(ScreenWidth - 120, 5)
+                , Color.White);
             //Floor only gets drawn once, then dies.
-            if (floor.Active == true)
+            if (floor.Active)
             {
                 _spriteBatch.Draw(floorSprite, floor.Position, Color.White);
             }
+
             //Player
             player.Draw(_spriteBatch);
             //Game Over
-            if (gameOver == true)
+            if (gameOver)
             {
                 _spriteBatch.DrawString(font
-                , $"GAME OVER\nScore {score.ToString()}"
-                , new Vector2(ScreenWidth/2, ScreenHeight/2)
-                , Color.White);
+                    , $"GAME OVER\nScore {score.ToString()}"
+                    , new Vector2(ScreenWidth / 2, ScreenHeight / 2)
+                    , Color.White);
             }
+
             _spriteBatch.End();
             base.Draw(gameTime);
         }
 
         private void InitWalls()
         {
-           leftWall = new Wall();
-           rightWall = new Wall();
-           leftWall.Initialize(wallSprite, new Vector2(0
-           ,0));
-           rightWall.Initialize(wallSprite,new Vector2(490
-           ,0));
+            leftWall = new Wall();
+            rightWall = new Wall();
+            leftWall.Initialize(wallSprite, new Vector2(0
+                , 0));
+            rightWall.Initialize(wallSprite, new Vector2(485
+                , 0));
+        }
+
+        private void EventHandler(GameTime gameTime)
+        {
+            //Check if game is still active before updating.
+            if (gameOver) return;
+
+            //Current key state
+            var keyState = Keyboard.GetState();
+
+            //Jump from floor
+            if (keyState.IsKeyDown(Keys.Space)
+                && floor.Active
+                && player.Position.Y == 768)
+            {
+                player.Speed -= new Vector2(0, 10);
+                player.Position += player.Speed;
+            }
+
+            //Right
+            if (keyState.IsKeyDown(Keys.Right)
+                && player.Position.X + player.Width / 2 <=
+                rightWall.Position.X -
+                rightWall.Width + 5)
+            {
+                player.Position += new Vector2(5, 0);
+            }
+
+            //Left 
+            if (keyState.IsKeyDown(Keys.Left)
+                && player.Position.X + player.Width / 2 >=
+                leftWall.Position.X +
+                leftWall.Width + 15)
+            {
+                player.Position -= new Vector2(5, 0);
+            }
+
+            //right slide 
+            if (keyState.IsKeyDown(Keys.Right)
+                && player.Position.X + player.Width / 2 ==
+                rightWall.Position.X -
+                rightWall.Width + 7)
+            {
+                //TODO: Reset gravity when away from wall.
+                gravity = 0.5f;
+            }
+
+            //left slide
+            if (keyState.IsKeyDown(Keys.Left)
+                && player.Position.X + player.Width / 2 ==
+                leftWall.Position.X +
+                leftWall.Width + 15)
+            {
+                //TODO: Reset gravity when away from wall.
+                gravity = 0.5f;
+            }
+
+            //Right jump
+            if (keyState.IsKeyDown(Keys.Left)
+                && (keyState.IsKeyDown(Keys.Space))
+                && player.Position.X + player.Width / 2 ==
+                rightWall.Position.X -
+                rightWall.Width + 7) 
+            {
+                player.Speed -= new Vector2(0,10);
+            }
+
+            //Left jump 
+            if (keyState.IsKeyDown(Keys.Right)
+                && (keyState.IsKeyDown(Keys.Space))
+                && player.Position.X + player.Width / 2 ==
+                leftWall.Position.X +
+                leftWall.Width + 15) 
+            {
+                player.Speed -= new Vector2(0,10);
+                player.Position -= player.Speed;
+            }
+
+        }
+
+        private void UpdateGravity()
+        {
+            //Gravity, the player falls down until they reach screen size.
+            if (player.Speed != new Vector2(0, 0)
+                && player.Position.Y != 768)
+            {
+                player.Position += new Vector2(0, gravity);
+            }
+
+            //When the floor is active the player won't fall down. 
+            if (floor.Active
+                && player.Position.Y >= floor.Position.Y - floor.Height -
+                player.Height / 2 - 2)
+            {
+                player.Speed = new Vector2(0, 0);
+                player.Position = new Vector2(player.Position.X, 768);
+            }
+
+            //When the player gets to the top. reset their position to the bottom of the screen and kill the floor.
+            if (player.Position.Y <= 0)
+            {
+                player.Position = new Vector2(player.Position.X
+                    , 700);
+                score += 10;
+                floor.Active = false;
+            }
+
+            //When the player drops off, game is over.
+            if (!floor.Active
+                && player.Position.Y >= ScreenHeight)
+            {
+                gameOver = true;
+            }
         }
     }
 }

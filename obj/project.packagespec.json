@@ -1,15 +1,21 @@
 ﻿{
   "version": "1.0.0",
   "restore": {
-    "projectUniqueName": "/home/mars/RiderProjects/WallJumper/WallJumper.csproj",
+    "projectUniqueName": "C:\\Users\\MR071411\\Desktop\\FunCode\\CSharp\\WallJumper\\WallJumper.csproj",
     "projectName": "WallJumper",
-    "projectPath": "/home/mars/RiderProjects/WallJumper/WallJumper.csproj",
-    "outputPath": "/home/mars/RiderProjects/WallJumper/obj/",
+    "projectPath": "C:\\Users\\MR071411\\Desktop\\FunCode\\CSharp\\WallJumper\\WallJumper.csproj",
+    "outputPath": "C:\\Users\\MR071411\\Desktop\\FunCode\\CSharp\\WallJumper\\obj\\",
     "projectStyle": "PackageReference",
+    "fallbackFolders": [
+      "C:\\Microsoft\\Xamarin\\NuGet",
+      "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+    ],
     "originalTargetFrameworks": [
       "netcoreapp3.0"
     ],
     "sources": {
+      "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+      "C:\\Users\\MR071411\\AppData\\Roaming\\Cosmos User Kit\\packages\\": {},
       "https://api.nuget.org/v3/index.json": {}
     },
     "frameworks": {
@@ -51,11 +57,15 @@
           "version": "[3.0.1, 3.0.1]"
         },
         {
-          "name": "Microsoft.NETCore.App.Host.linux-x64",
-          "version": "[3.0.1, 3.0.1]"
+          "name": "Microsoft.NETCore.App.Host.win-x64",
+          "version": "[3.0.2, 3.0.2]"
         },
         {
           "name": "Microsoft.NETCore.App.Ref",
+          "version": "[3.0.0, 3.0.0]"
+        },
+        {
+          "name": "Microsoft.WindowsDesktop.App.Ref",
           "version": "[3.0.0, 3.0.0]"
         }
       ],
@@ -64,7 +74,7 @@
           "privateAssets": "all"
         }
       },
-      "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/3.1.100/RuntimeIdentifierGraph.json"
+      "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
     }
   }
 }

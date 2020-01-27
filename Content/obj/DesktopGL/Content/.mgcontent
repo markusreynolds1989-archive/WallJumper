@@ -4,10 +4,10 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
-    <File>/home/mars/RiderProjects/WallJumper/Content/Floor.png</File>
-    <File>/home/mars/RiderProjects/WallJumper/Content/Font.spritefont</File>
-    <File>/home/mars/RiderProjects/WallJumper/Content/Player.png</File>
-    <File>/home/mars/RiderProjects/WallJumper/Content/Wall.png</File>
+    <File>C:/Users/MR071411/Desktop/FunCode/CSharp/WallJumper/Content/Floor.png</File>
+    <File>C:/Users/MR071411/Desktop/FunCode/CSharp/WallJumper/Content/Font.spritefont</File>
+    <File>C:/Users/MR071411/Desktop/FunCode/CSharp/WallJumper/Content/Player.png</File>
+    <File>C:/Users/MR071411/Desktop/FunCode/CSharp/WallJumper/Content/Wall.png</File>
   </SourceFiles>
   <DestFiles>
     <File xsi:nil="true" />

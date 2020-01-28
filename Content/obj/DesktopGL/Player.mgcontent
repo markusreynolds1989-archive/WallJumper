@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>/home/mars/RiderProjects/WallJumper/Content/Player.png</SourceFile>
-  <SourceTime>2020-01-24T19:58:59.8386073-06:00</SourceTime>
-  <DestFile>/home/mars/RiderProjects/WallJumper/Content/bin/DesktopGL/Player.xnb</DestFile>
-  <DestTime>2020-01-25T06:08:44.9263389-06:00</DestTime>
+  <SourceFile>C:/Users/MR071411/Desktop/FunCode/CSharp/WallJumper/Content/Player.png</SourceFile>
+  <SourceTime>2020-01-28T10:18:01.4875139-06:00</SourceTime>
+  <DestFile>C:/Users/MR071411/Desktop/FunCode/CSharp/WallJumper/Content/bin/DesktopGL/Player.xnb</DestFile>
+  <DestTime>2020-01-28T10:20:08.8445467-06:00</DestTime>
   <Importer>TextureImporter</Importer>
-  <ImporterTime>2020-01-17T05:26:01.4101597-06:00</ImporterTime>
+  <ImporterTime>2018-12-08T10:35:54-06:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
-  <ProcessorTime>2020-01-17T05:26:01.4101597-06:00</ProcessorTime>
+  <ProcessorTime>2018-12-08T10:35:54-06:00</ProcessorTime>
   <Parameters>
     <Key>ColorKeyColor</Key>
     <Value>255,0,255,255</Value>

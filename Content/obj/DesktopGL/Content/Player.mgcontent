@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/Users/MR071411/Desktop/FunCode/CSharp/WallJumper/Content/Player.png</SourceFile>
-  <SourceTime>2020-01-27T09:11:16.9163179-06:00</SourceTime>
-  <DestFile>C:/Users/MR071411/Desktop/FunCode/CSharp/WallJumper/Content/bin/DesktopGL/Content/Player.xnb</DestFile>
-  <DestTime>2020-01-27T09:11:33.0899978-06:00</DestTime>
+  <SourceFile>C:/Users/MR071411/Desktop/funcode/csharp/walljumper/Content/Player.png</SourceFile>
+  <SourceTime>2020-01-28T10:18:01.4875139-06:00</SourceTime>
+  <DestFile>C:/Users/MR071411/Desktop/funcode/csharp/walljumper/Content/bin/DesktopGL/Content/Player.xnb</DestFile>
+  <DestTime>2020-01-28T13:29:19.6940321-06:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2018-08-05T14:17:44-05:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

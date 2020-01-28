@@ -9,20 +9,28 @@
       <e p="bin" t="ExcludeRecursive" />
       <e p="Collision.cs" t="Include" />
       <e p="Content" t="Include">
+        <e p="Apple.png" t="Include" />
         <e p="bin" t="Include">
           <e p="DesktopGL" t="Include">
+            <e p="Apple.xnb" t="Include" />
+            <e p="Cherries.xnb" t="Include" />
             <e p="Content" t="Include">
+              <e p="Apple.xnb" t="Include" />
+              <e p="Cherries.xnb" t="Include" />
               <e p="Floor.xnb" t="Include" />
               <e p="Font.xnb" t="Include" />
               <e p="Player.xnb" t="Include" />
+              <e p="Rock.xnb" t="Include" />
               <e p="Wall.xnb" t="Include" />
             </e>
             <e p="Floor.xnb" t="Include" />
             <e p="Font.xnb" t="Include" />
             <e p="Player.xnb" t="Include" />
+            <e p="Rock.xnb" t="Include" />
             <e p="Wall.xnb" t="Include" />
           </e>
         </e>
+        <e p="Cherries.png" t="Include" />
         <e p="Content.mgcb" t="Include" />
         <e p="Floor.png" t="Include" />
         <e p="Font.spritefont" t="Include" />
@@ -30,23 +38,31 @@
           <e p="DesktopGL" t="Include">
             <e p=".mgcontent" t="Include" />
             <e p=".mgstats" t="Include" />
+            <e p="Apple.mgcontent" t="Include" />
+            <e p="Cherries.mgcontent" t="Include" />
             <e p="Content" t="Include">
               <e p=".mgcontent" t="Include" />
+              <e p="Apple.mgcontent" t="Include" />
+              <e p="Cherries.mgcontent" t="Include" />
               <e p="Floor.mgcontent" t="Include" />
               <e p="Font.mgcontent" t="Include" />
               <e p="Player.mgcontent" t="Include" />
+              <e p="Rock.mgcontent" t="Include" />
               <e p="Wall.mgcontent" t="Include" />
             </e>
             <e p="Floor.mgcontent" t="Include" />
             <e p="Font.mgcontent" t="Include" />
             <e p="Player.mgcontent" t="Include" />
+            <e p="Rock.mgcontent" t="Include" />
             <e p="Wall.mgcontent" t="Include" />
           </e>
         </e>
         <e p="Player.png" t="Include" />
+        <e p="Rock.png" t="Include" />
         <e p="Wall.png" t="Include" />
       </e>
       <e p="Floor.cs" t="Include" />
+      <e p="Fruit.cs" t="Include" />
       <e p="Game1.cs" t="Include" />
       <e p="Icon.bmp" t="Include" />
       <e p="Icon.ico" t="Include" />
@@ -62,6 +78,7 @@
       <e p="Player.cs" t="Include" />
       <e p="Program.cs" t="Include" />
       <e p="README.md" t="Include" />
+      <e p="Rock.cs" t="Include" />
       <e p="Wall.cs" t="Include" />
       <e p="WallJumper.csproj" t="IncludeRecursive" />
     </e>

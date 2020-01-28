@@ -5,6 +5,7 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Net.Mime;
 
 namespace WallJumper
 {
@@ -16,14 +17,18 @@ namespace WallJumper
         private Texture2D wallSprite;
         private Texture2D floorSprite;
         private Texture2D playerSprite;
+        private Texture2D apple;
+        private Texture2D cherries;
+        private Texture2D rock;
         private Floor floor;
         private SpriteFont font;
-        private TimeSpan bulletSpawnTime;
-        private TimeSpan previousBulletSpawnTime;
+        private TimeSpan rockSpawnTime;
+        private TimeSpan previousRocktSpawnTime;
+        private TimeSpan fruitSpawnTime;
+        private TimeSpan previousFruitSpawnTime;
 
         private double gravity = 0.4;
 
-        //private List<Bullet> bullets;
         private Wall leftWall;
         private Wall rightWall;
         private Player player;
@@ -31,6 +36,8 @@ namespace WallJumper
         private bool win = false;
         private int score = 0;
         private int level = 1;
+        private List<Fruit> fruits;
+        private List<Rock> rocks;
         private const int ScreenWidth = 400;
         private const int ScreenHeight = 800;
 
@@ -54,6 +61,10 @@ namespace WallJumper
                 , ScreenHeight - 32));
             floor = new Floor();
             floor.Initialize(floorSprite, new Vector2(0, 794));
+            rockSpawnTime = TimeSpan.FromSeconds(0.5f);
+            fruitSpawnTime = TimeSpan.FromSeconds(0.5f);
+            fruits = new List<Fruit>();
+            rocks = new List<Rock>();
             base.Initialize();
         }
 
@@ -63,6 +74,7 @@ namespace WallJumper
             font = Content.Load<SpriteFont>("Font");
             wallSprite = Content.Load<Texture2D>("Wall");
             playerSprite = Content.Load<Texture2D>("Player");
+            cherries = Content.Load<Texture2D>("Cherries");
             //Player has to be init after sprite is loaded.
             player.PlayerSprite = playerSprite;
             InitWalls();
@@ -92,6 +104,10 @@ namespace WallJumper
                 _spriteBatch.Draw(floorSprite, floor.Position, Color.White);
             }
 
+            foreach (var fruit in fruits)
+            {
+                _spriteBatch.Draw(cherries,fruit.Position,Color.White);
+            }
             //Player
             player.Draw(_spriteBatch);
             //Game Over
@@ -147,6 +163,23 @@ namespace WallJumper
                 , floor.Position
                 , floor.Width
                 , floor.Height);
+            
+            //Fruits
+            foreach (var fruit in fruits)
+            {
+                if (Collision.RectangleCollision(
+                    player.Position
+                    , player.Width
+                    , player.Height
+                    , fruit.Position
+                    , fruit.Width
+                    , fruit.Height))
+                {
+                    fruit.Active = false;
+                }
+            }
+            //Rocks
+            
             //Controls 
             //Right
             if (keyState.IsKeyDown(Keys.Right)
@@ -222,6 +255,35 @@ namespace WallJumper
                 && player.Position.Y >= ScreenHeight)
             {
                 gameOver = true;
+            }
+            
+            CreateFruit(gameTime);
+            UpdateFruit();
+        }
+
+        public void CreateFruit(GameTime gameTime)
+        {
+            var random = new Random();
+            if (gameTime.TotalGameTime - previousFruitSpawnTime >
+                fruitSpawnTime)
+            {
+                previousFruitSpawnTime = gameTime.TotalGameTime;
+                var fruit = new Fruit();
+                var x = random.Next(10, 360);
+                var y = random.Next(20, 600);
+                fruit.Initialize(new Vector2(x,y),cherries);
+                fruits.Add(fruit);
+            }
+        }
+
+        public void UpdateFruit()
+        {
+            for (var i = 0; i < fruits.Count; i++)
+            {
+                if (!fruits[i].Active)
+                {
+                    fruits.Remove(fruits[i]);
+                }
             }
         }
     }

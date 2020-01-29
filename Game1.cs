@@ -19,15 +19,15 @@ namespace WallJumper
         private Texture2D playerSprite;
         private Texture2D apple;
         private Texture2D cherries;
-        private Texture2D rock;
+        private Texture2D rockSprite;
         private Floor floor;
         private SpriteFont font;
         private TimeSpan rockSpawnTime;
-        private TimeSpan previousRocktSpawnTime;
+        private TimeSpan previousRockSpawnTime;
         private TimeSpan fruitSpawnTime;
         private TimeSpan previousFruitSpawnTime;
 
-        private double gravity = 0.4;
+        private float gravity = 0.4f;
 
         private Wall leftWall;
         private Wall rightWall;
@@ -61,8 +61,8 @@ namespace WallJumper
                 , ScreenHeight - 32));
             floor = new Floor();
             floor.Initialize(floorSprite, new Vector2(0, 794));
-            rockSpawnTime = TimeSpan.FromSeconds(0.5f);
-            fruitSpawnTime = TimeSpan.FromSeconds(0.5f);
+            rockSpawnTime = TimeSpan.FromSeconds(1f);
+            fruitSpawnTime = TimeSpan.FromSeconds(3f);
             fruits = new List<Fruit>();
             rocks = new List<Rock>();
             base.Initialize();
@@ -75,6 +75,7 @@ namespace WallJumper
             wallSprite = Content.Load<Texture2D>("Wall");
             playerSprite = Content.Load<Texture2D>("Player");
             cherries = Content.Load<Texture2D>("Cherries");
+            rockSprite = Content.Load<Texture2D>("Rock");
             //Player has to be init after sprite is loaded.
             player.PlayerSprite = playerSprite;
             InitWalls();
@@ -106,7 +107,12 @@ namespace WallJumper
 
             foreach (var fruit in fruits)
             {
-                _spriteBatch.Draw(cherries,fruit.Position,Color.White);
+                _spriteBatch.Draw(cherries, fruit.Position, Color.White);
+            }
+
+            foreach (var rock in rocks)
+            {
+                _spriteBatch.Draw(rockSprite,rock.Position,Color.White);
             }
             //Player
             player.Draw(_spriteBatch);
@@ -163,7 +169,7 @@ namespace WallJumper
                 , floor.Position
                 , floor.Width
                 , floor.Height);
-            
+
             //Fruits
             foreach (var fruit in fruits)
             {
@@ -176,10 +182,25 @@ namespace WallJumper
                     , fruit.Height))
                 {
                     fruit.Active = false;
+                    score += 50;
                 }
             }
+
             //Rocks
-            
+            foreach (var rock in rocks)
+            {
+                if (Collision.RectangleCollision(
+                    player.Position
+                    , player.Width
+                    , player.Height
+                    , rock.Position
+                    , rock.Width
+                    , rock.Height))
+                {
+                    gameOver = true;
+                }
+            }
+
             //Controls 
             //Right
             if (keyState.IsKeyDown(Keys.Right)
@@ -227,7 +248,7 @@ namespace WallJumper
             //Fall Down
             if (player.Position.Y != 768)
             {
-                player.Speed += new Vector2(0, (float) gravity);
+                player.Speed += new Vector2(0, gravity);
                 player.Position += player.Speed;
             }
 
@@ -239,6 +260,17 @@ namespace WallJumper
                 score += 10;
                 level++;
                 floor.Active = false;
+                //reset fruit
+                foreach (var fruit in fruits)
+                {
+                    fruit.Active = false;
+                }
+
+                //reset rocks
+                foreach (var rock in rocks)
+                {
+                    rock.Active = false;
+                }
             }
 
             //When the floor is active the player won't fall down. 
@@ -256,8 +288,10 @@ namespace WallJumper
             {
                 gameOver = true;
             }
-            
+
             CreateFruit(gameTime);
+            CreateRock(gameTime);
+            UpdateRocks();
             UpdateFruit();
         }
 
@@ -265,24 +299,59 @@ namespace WallJumper
         {
             var random = new Random();
             if (gameTime.TotalGameTime - previousFruitSpawnTime >
-                fruitSpawnTime)
+                fruitSpawnTime
+                && fruits.Count < 3
+                && !floor.Active)
             {
                 previousFruitSpawnTime = gameTime.TotalGameTime;
                 var fruit = new Fruit();
                 var x = random.Next(10, 360);
                 var y = random.Next(20, 600);
-                fruit.Initialize(new Vector2(x,y),cherries);
+                fruit.Initialize(new Vector2(x, y), cherries);
                 fruits.Add(fruit);
             }
         }
 
         public void UpdateFruit()
         {
-            for (var i = 0; i < fruits.Count; i++)
+            for (var i = 0;
+                i < fruits.Count; i++)
             {
                 if (!fruits[i].Active)
                 {
                     fruits.Remove(fruits[i]);
+                }
+            }
+        }
+
+        public void CreateRock(GameTime gameTime)
+        {
+            var random = new Random();
+            if (gameTime.TotalGameTime - previousRockSpawnTime >
+                rockSpawnTime
+                && rocks.Count < 3
+                && !floor.Active)
+            {
+                previousRockSpawnTime = gameTime.TotalGameTime;
+                var rock = new Rock();
+                var x = random.Next(20, 340);
+                rock.Initialize(new Vector2(x, 50), rockSprite);
+                rocks.Add(rock);
+            }
+        }
+
+        public void UpdateRocks()
+        {
+            for (var i = 0; i < rocks.Count; i++)
+            {
+                rocks[i].Update(gravity);
+                if (rocks[i].Position.Y > ScreenHeight)
+                {
+                    rocks[i].Active = false;
+                }
+                if (!rocks[i].Active)
+                {
+                    rocks.Remove(rocks[i]);
                 }
             }
         }

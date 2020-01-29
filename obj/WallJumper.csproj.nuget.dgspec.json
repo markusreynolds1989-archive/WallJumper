@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\MR071411\\Desktop\\FunCode\\CSharp\\WallJumper\\WallJumper.csproj": {}
+    "C:\\Users\\MR071411\\Desktop\\Funcode\\CSharp\\Walljumper\\WallJumper.csproj": {}
   },
   "projects": {
-    "C:\\Users\\MR071411\\Desktop\\FunCode\\CSharp\\WallJumper\\WallJumper.csproj": {
+    "C:\\Users\\MR071411\\Desktop\\Funcode\\CSharp\\Walljumper\\WallJumper.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\MR071411\\Desktop\\FunCode\\CSharp\\WallJumper\\WallJumper.csproj",
+        "projectUniqueName": "C:\\Users\\MR071411\\Desktop\\Funcode\\CSharp\\Walljumper\\WallJumper.csproj",
         "projectName": "WallJumper",
-        "projectPath": "C:\\Users\\MR071411\\Desktop\\FunCode\\CSharp\\WallJumper\\WallJumper.csproj",
+        "projectPath": "C:\\Users\\MR071411\\Desktop\\Funcode\\CSharp\\Walljumper\\WallJumper.csproj",
         "packagesPath": "C:\\Users\\MR071411\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\MR071411\\Desktop\\FunCode\\CSharp\\WallJumper\\obj\\",
+        "outputPath": "C:\\Users\\MR071411\\Desktop\\Funcode\\CSharp\\Walljumper\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet",
+          "C:\\Microsoft\\Xamarin\\NuGet\\",
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [

@@ -19,6 +19,8 @@
               <e p="Cherries.xnb" t="Include" />
               <e p="Floor.xnb" t="Include" />
               <e p="Font.xnb" t="Include" />
+              <e p="GravityDown.xnb" t="Include" />
+              <e p="GravityUp.xnb" t="Include" />
               <e p="Player.xnb" t="Include" />
               <e p="Rock.xnb" t="Include" />
               <e p="Wall.xnb" t="Include" />
@@ -34,6 +36,8 @@
         <e p="Content.mgcb" t="Include" />
         <e p="Floor.png" t="Include" />
         <e p="Font.spritefont" t="Include" />
+        <e p="GravityDown.png" t="Include" />
+        <e p="GravityUp.png" t="Include" />
         <e p="obj" t="Include">
           <e p="DesktopGL" t="Include">
             <e p=".mgcontent" t="Include" />
@@ -46,6 +50,8 @@
               <e p="Cherries.mgcontent" t="Include" />
               <e p="Floor.mgcontent" t="Include" />
               <e p="Font.mgcontent" t="Include" />
+              <e p="GravityDown.mgcontent" t="Include" />
+              <e p="GravityUp.mgcontent" t="Include" />
               <e p="Player.mgcontent" t="Include" />
               <e p="Rock.mgcontent" t="Include" />
               <e p="Wall.mgcontent" t="Include" />
@@ -76,6 +82,7 @@
       </e>
       <e p="packages" t="ExcludeRecursive" />
       <e p="Player.cs" t="Include" />
+      <e p="PowerUp.cs" t="Include" />
       <e p="Program.cs" t="Include" />
       <e p="README.md" t="Include" />
       <e p="Rock.cs" t="Include" />

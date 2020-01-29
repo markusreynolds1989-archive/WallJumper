@@ -8,11 +8,15 @@
     <File>C:/Users/MR071411/Desktop/FunCode/CSharp/WallJumper/Content/Cherries.png</File>
     <File>C:/Users/MR071411/Desktop/FunCode/CSharp/WallJumper/Content/Floor.png</File>
     <File>C:/Users/MR071411/Desktop/FunCode/CSharp/WallJumper/Content/Font.spritefont</File>
+    <File>C:/Users/MR071411/Desktop/FunCode/CSharp/WallJumper/Content/GravityDown.png</File>
+    <File>C:/Users/MR071411/Desktop/FunCode/CSharp/WallJumper/Content/GravityUp.png</File>
     <File>C:/Users/MR071411/Desktop/FunCode/CSharp/WallJumper/Content/Player.png</File>
     <File>C:/Users/MR071411/Desktop/FunCode/CSharp/WallJumper/Content/Rock.png</File>
     <File>C:/Users/MR071411/Desktop/FunCode/CSharp/WallJumper/Content/Wall.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

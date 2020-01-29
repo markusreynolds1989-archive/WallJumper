@@ -20,15 +20,19 @@ namespace WallJumper
         private Texture2D apple;
         private Texture2D cherries;
         private Texture2D rockSprite;
+        private Texture2D gravityUpSprite;
+        private Texture2D gravityDownSprite;
         private Floor floor;
         private SpriteFont font;
         private TimeSpan rockSpawnTime;
         private TimeSpan previousRockSpawnTime;
         private TimeSpan fruitSpawnTime;
         private TimeSpan previousFruitSpawnTime;
-
-        private float gravity = 0.4f;
-
+        private TimeSpan powerUpSpawnTime;
+        private TimeSpan previousPowerUpSpawnTime;
+        private bool tutorial = true;
+        private int rockMod = 1;
+        private float gravity = 0.1f;
         private Wall leftWall;
         private Wall rightWall;
         private Player player;
@@ -38,6 +42,7 @@ namespace WallJumper
         private int level = 1;
         private List<Fruit> fruits;
         private List<Rock> rocks;
+        private List<PowerUp> powerUps;
         private const int ScreenWidth = 400;
         private const int ScreenHeight = 800;
 
@@ -63,8 +68,10 @@ namespace WallJumper
             floor.Initialize(floorSprite, new Vector2(0, 794));
             rockSpawnTime = TimeSpan.FromSeconds(1f);
             fruitSpawnTime = TimeSpan.FromSeconds(3f);
+            powerUpSpawnTime = TimeSpan.FromSeconds(10f);
             fruits = new List<Fruit>();
             rocks = new List<Rock>();
+            powerUps = new List<PowerUp>();
             base.Initialize();
         }
 
@@ -76,6 +83,8 @@ namespace WallJumper
             playerSprite = Content.Load<Texture2D>("Player");
             cherries = Content.Load<Texture2D>("Cherries");
             rockSprite = Content.Load<Texture2D>("Rock");
+            gravityUpSprite = Content.Load<Texture2D>("GravityUp");
+            gravityDownSprite = Content.Load<Texture2D>("GravityDown");
             //Player has to be init after sprite is loaded.
             player.PlayerSprite = playerSprite;
             InitWalls();
@@ -89,10 +98,20 @@ namespace WallJumper
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.Black);
+            GraphicsDevice.Clear(Color.CornflowerBlue);
             _spriteBatch.Begin();
             _spriteBatch.Draw(wallSprite, leftWall.Position, Color.White);
             _spriteBatch.Draw(wallSprite, rightWall.Position, Color.White);
+            if (tutorial)
+            {
+                _spriteBatch.DrawString(font
+                , "Hold space bar to jump.\nKeep it held and then jump off\n" +
+                  "walls by pressing away from \nthem with the arrow keys.\nCollect" +
+                  "fruit watch out for falling rocks.\n" +
+                  "Press R to reset."
+                , new Vector2(15,600)
+                ,Color.White );
+            }
             //Score
             _spriteBatch.DrawString(font
                 , $"Score: {score.ToString()}" +
@@ -114,6 +133,12 @@ namespace WallJumper
             {
                 _spriteBatch.Draw(rockSprite,rock.Position,Color.White);
             }
+
+            foreach (var powerUp in powerUps)
+            {
+                powerUp.Draw(_spriteBatch);
+            }
+            
             //Player
             player.Draw(_spriteBatch);
             //Game Over
@@ -121,7 +146,7 @@ namespace WallJumper
             {
                 _spriteBatch.DrawString(font
                     , $"GAME OVER\nScore {score.ToString()}"
-                    , new Vector2(ScreenWidth / 2, ScreenHeight / 2)
+                    , new Vector2((ScreenWidth / 3), ScreenHeight / 2)
                     , Color.White);
             }
 
@@ -142,11 +167,20 @@ namespace WallJumper
         private void EventHandler(GameTime gameTime)
         {
             //Check if game is still active before updating.
-            if (gameOver) return;
-
+           
             //Current key state
             var keyState = Keyboard.GetState();
+            if (keyState.IsKeyDown(Keys.R))
+            {
+                gameOver = false;
+                Initialize();
+                level = 1;
+                score = 0;
+                gravity = 0.1f;
+                tutorial = true;
+            }
 
+            if (gameOver) return;
             //Collision Checks
             var collisionRightWall = Collision.RectangleCollision(
                 player.Position
@@ -185,7 +219,6 @@ namespace WallJumper
                     score += 50;
                 }
             }
-
             //Rocks
             foreach (var rock in rocks)
             {
@@ -200,7 +233,22 @@ namespace WallJumper
                     gameOver = true;
                 }
             }
-
+            //PowerUps
+            foreach (var powerUp in powerUps)
+            {
+                if (Collision.RectangleCollision(
+                    player.Position
+                    , player.Width
+                    , player.Height
+                    , powerUp.Position
+                    , powerUp.Width
+                    , powerUp.Height))
+                {
+                    gravity -= 0.2f;
+                    powerUp.Active = false;
+                }
+            }
+            
             //Controls 
             //Right
             if (keyState.IsKeyDown(Keys.Right)
@@ -259,7 +307,14 @@ namespace WallJumper
                     , 700);
                 score += 10;
                 level++;
+                if (level % 3 == 0)
+                {
+                    gravity += 0.1f;
+                    rockMod++; 
+                    rockSpawnTime -= TimeSpan.FromSeconds(0.1f);
+                }
                 floor.Active = false;
+                tutorial = false;
                 //reset fruit
                 foreach (var fruit in fruits)
                 {
@@ -270,6 +325,11 @@ namespace WallJumper
                 foreach (var rock in rocks)
                 {
                     rock.Active = false;
+                }
+
+                foreach (var powerup in powerUps)
+                {
+                    powerup.Active = false;
                 }
             }
 
@@ -291,11 +351,13 @@ namespace WallJumper
 
             CreateFruit(gameTime);
             CreateRock(gameTime);
+            CreatePowerUp(gameTime);
             UpdateRocks();
             UpdateFruit();
+            UpdatePowerUps();
         }
 
-        public void CreateFruit(GameTime gameTime)
+        private void CreateFruit(GameTime gameTime)
         {
             var random = new Random();
             if (gameTime.TotalGameTime - previousFruitSpawnTime >
@@ -312,7 +374,7 @@ namespace WallJumper
             }
         }
 
-        public void UpdateFruit()
+        private void UpdateFruit()
         {
             for (var i = 0;
                 i < fruits.Count; i++)
@@ -324,12 +386,12 @@ namespace WallJumper
             }
         }
 
-        public void CreateRock(GameTime gameTime)
+        private void CreateRock(GameTime gameTime)
         {
             var random = new Random();
             if (gameTime.TotalGameTime - previousRockSpawnTime >
                 rockSpawnTime
-                && rocks.Count < 3
+                && rocks.Count < 3 * rockMod
                 && !floor.Active)
             {
                 previousRockSpawnTime = gameTime.TotalGameTime;
@@ -340,11 +402,11 @@ namespace WallJumper
             }
         }
 
-        public void UpdateRocks()
+        private void UpdateRocks()
         {
             for (var i = 0; i < rocks.Count; i++)
             {
-                rocks[i].Update(gravity);
+                rocks[i].Update(gravity + 1);
                 if (rocks[i].Position.Y > ScreenHeight)
                 {
                     rocks[i].Active = false;
@@ -355,5 +417,32 @@ namespace WallJumper
                 }
             }
         }
+        private void CreatePowerUp(GameTime gameTime)
+        {
+            var random = new Random();
+            if (gameTime.TotalGameTime - previousPowerUpSpawnTime >
+                powerUpSpawnTime
+                && powerUps.Count < 1
+                && !floor.Active)
+            {
+                previousFruitSpawnTime = gameTime.TotalGameTime;
+                var powerUp = new PowerUp();
+                var x = random.Next(10, 360);
+                var y = random.Next(20, 600);
+                powerUp.Initialize(new Vector2(x, y), gravityDownSprite);
+                powerUps.Add(powerUp);
+            }
+        } 
+        private void UpdatePowerUps()
+        {
+            for (var i = 0;
+                i < powerUps.Count; i++)
+            {
+                if (!powerUps[i].Active)
+                {
+                    powerUps.Remove(powerUps[i]);
+                }
+            }
+        } 
     }
 }

@@ -75,3 +75,5 @@ C:\Users\MR071411\Desktop\FunCode\CSharp\WallJumper\obj\Debug\netcoreapp3.0\Wall
 C:\Users\MR071411\Desktop\FunCode\CSharp\WallJumper\bin\Debug\netcoreapp3.0\Content\Apple.xnb
 C:\Users\MR071411\Desktop\FunCode\CSharp\WallJumper\bin\Debug\netcoreapp3.0\Content\Cherries.xnb
 C:\Users\MR071411\Desktop\FunCode\CSharp\WallJumper\bin\Debug\netcoreapp3.0\Content\Rock.xnb
+C:\Users\MR071411\Desktop\FunCode\CSharp\WallJumper\bin\Debug\netcoreapp3.0\Content\GravityDown.xnb
+C:\Users\MR071411\Desktop\FunCode\CSharp\WallJumper\bin\Debug\netcoreapp3.0\Content\GravityUp.xnb

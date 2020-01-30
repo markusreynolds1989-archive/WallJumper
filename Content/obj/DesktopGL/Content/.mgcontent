@@ -4,15 +4,15 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Users/MR071411/Desktop/FunCode/CSharp/WallJumper/Content/Apple.png</File>
-    <File>C:/Users/MR071411/Desktop/FunCode/CSharp/WallJumper/Content/Cherries.png</File>
-    <File>C:/Users/MR071411/Desktop/FunCode/CSharp/WallJumper/Content/Floor.png</File>
-    <File>C:/Users/MR071411/Desktop/FunCode/CSharp/WallJumper/Content/Font.spritefont</File>
-    <File>C:/Users/MR071411/Desktop/FunCode/CSharp/WallJumper/Content/GravityDown.png</File>
-    <File>C:/Users/MR071411/Desktop/FunCode/CSharp/WallJumper/Content/GravityUp.png</File>
-    <File>C:/Users/MR071411/Desktop/FunCode/CSharp/WallJumper/Content/Player.png</File>
-    <File>C:/Users/MR071411/Desktop/FunCode/CSharp/WallJumper/Content/Rock.png</File>
-    <File>C:/Users/MR071411/Desktop/FunCode/CSharp/WallJumper/Content/Wall.png</File>
+    <File>C:/Users/MR071411/desktop/Funcode/CSharp/walljumper/Content/Apple.png</File>
+    <File>C:/Users/MR071411/desktop/Funcode/CSharp/walljumper/Content/Cherries.png</File>
+    <File>C:/Users/MR071411/desktop/Funcode/CSharp/walljumper/Content/Floor.png</File>
+    <File>C:/Users/MR071411/desktop/Funcode/CSharp/walljumper/Content/Font.spritefont</File>
+    <File>C:/Users/MR071411/desktop/Funcode/CSharp/walljumper/Content/GravityDown.png</File>
+    <File>C:/Users/MR071411/desktop/Funcode/CSharp/walljumper/Content/GravityUp.png</File>
+    <File>C:/Users/MR071411/desktop/Funcode/CSharp/walljumper/Content/Player.png</File>
+    <File>C:/Users/MR071411/desktop/Funcode/CSharp/walljumper/Content/Rock.png</File>
+    <File>C:/Users/MR071411/desktop/Funcode/CSharp/walljumper/Content/Wall.png</File>
   </SourceFiles>
   <DestFiles>
     <File xsi:nil="true" />

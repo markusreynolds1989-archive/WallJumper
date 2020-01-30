@@ -98,7 +98,7 @@ namespace WallJumper
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Black);
             _spriteBatch.Begin();
             _spriteBatch.Draw(wallSprite, leftWall.Position, Color.White);
             _spriteBatch.Draw(wallSprite, rightWall.Position, Color.White);
@@ -423,7 +423,8 @@ namespace WallJumper
             if (gameTime.TotalGameTime - previousPowerUpSpawnTime >
                 powerUpSpawnTime
                 && powerUps.Count < 1
-                && !floor.Active)
+                && !floor.Active
+                && gravity > 0.1f)
             {
                 previousFruitSpawnTime = gameTime.TotalGameTime;
                 var powerUp = new PowerUp();
